@@ -1,5 +1,6 @@
 package com.manhnv.vimaserver.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,14 +13,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DBMedia {
+public class Media {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String url;
-
-    @ManyToOne
-    @JoinColumn(name = "pitch_id", nullable = false)
-    private DBCluster pitch;
 }

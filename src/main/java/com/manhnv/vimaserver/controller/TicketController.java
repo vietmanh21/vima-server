@@ -1,24 +1,23 @@
 package com.manhnv.vimaserver.controller;
 
 import com.manhnv.vimaserver.common.CommonResult;
-import com.manhnv.vimaserver.dto.request.CreateTripRequest;
-import com.manhnv.vimaserver.service.TripService;
+import com.manhnv.vimaserver.dto.request.TicketPostRequest;
+import com.manhnv.vimaserver.service.TicketService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/trip")
+@RequestMapping("/ticket")
 @RequiredArgsConstructor
-public class TripController {
-    private final TripService tripService;
+public class TicketController {
+    private final TicketService ticketService;
+
     @PostMapping("/create")
-    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
-    public CommonResult createTrip(@Valid @RequestBody CreateTripRequest request) {
-        return CommonResult.success(tripService.createTrip(request));
+    public CommonResult createTicket(@Valid @RequestBody TicketPostRequest ticketPostRequest) {
+        return CommonResult.success(ticketService.createTicket(ticketPostRequest));
     }
 }

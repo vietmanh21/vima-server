@@ -1,4 +1,5 @@
 package com.manhnv.vimaserver.model.enumeration;
 
-public class PaymentMethod {
+public enum PaymentMethod {
+    BANKING, VNPAY
 }

@@ -1,12 +1,13 @@
-package com.yas.media.utils;
+package com.manhnv.vimaserver.utils;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import lombok.SneakyThrows;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 public class FileTypeValidator implements ConstraintValidator<ValidFileType, MultipartFile> {

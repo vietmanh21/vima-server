@@ -1,4 +1,7 @@
 package com.manhnv.vimaserver.model.enumeration;
 
-public class TicketStatus {
+public enum TicketStatus {
+    BOOKED,
+    CANCELLED,
+    COMPLETED
 }

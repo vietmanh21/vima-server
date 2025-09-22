@@ -1,4 +1,4 @@
-package com.yas.order.model.enumeration;
+package com.manhnv.vimaserver.model.enumeration;
 
 public enum PaymentStatus {
     PENDING,

@@ -1,6 +1,5 @@
-package com.yas.product.config;
+package com.manhnv.vimaserver.config;
 
-import java.util.Optional;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +9,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import java.util.Optional;
+
 @Configuration
-@EnableJpaRepositories("com.yas.product.repository")
-@EntityScan({"com.yas.product.model", "com.yas.product.model.attribute"})
+@EnableJpaRepositories("com.manhnv.vimaserver.repository")
+@EntityScan({"com.manhnv.vimaserver.model"})
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class DatabaseAutoConfig {
 

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "users")
@@ -15,20 +14,27 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DBUser {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;
+
+    @Column(nullable = false, unique = true)
     private String email;
     private String username;
-    private String password;
-    private String role; // e.g., "USER", "ADMIN"
-    @Builder.Default
-    private Boolean isActive = true;
 
-    @OneToMany(mappedBy = "user")
-    @Builder.Default
-    private List<DBCluster> clusters = new ArrayList<>();
+    @Column(nullable = false)
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Cart cart;
 }
