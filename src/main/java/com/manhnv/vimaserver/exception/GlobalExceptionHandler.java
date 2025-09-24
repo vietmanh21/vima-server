@@ -1,6 +1,5 @@
 package com.manhnv.vimaserver.exception;
 
-import com.manhnv.vimaserver.common.CommonResult;
 import com.manhnv.vimaserver.dto.response.ErrorVm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -21,12 +20,9 @@ public class GlobalExceptionHandler {
     private static final String ERROR_LOG_FORMAT = "Error: URI: {}, ErrorCode: {}, Message: {}";
     private static final String INVALID_REQUEST_INFORMATION_MESSAGE = "Request information is not valid";
 
-    @ExceptionHandler(ApiException.class)
-    public CommonResult handleApiException(ApiException e, WebRequest request) {
-        if (e.getErrorCode() != null) {
-            return CommonResult.failed(e.getErrorCode());
-        }
-        return CommonResult.failed(e.getMessage());
+    @ExceptionHandler(DuplicatedException.class)
+    protected ResponseEntity<ErrorVm> handleDuplicated(DuplicatedException ex) {
+        return handleBadRequest(ex, null);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

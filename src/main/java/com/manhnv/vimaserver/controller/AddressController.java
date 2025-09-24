@@ -1,12 +1,15 @@
 package com.manhnv.vimaserver.controller;
 
-import com.manhnv.vimaserver.common.CommonResult;
 import com.manhnv.vimaserver.dto.request.AddressPostRequest;
+import com.manhnv.vimaserver.model.Address;
 import com.manhnv.vimaserver.service.AddressService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/address")
@@ -16,12 +19,12 @@ public class AddressController {
 
     @PostMapping("/create")
     @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
-    public CommonResult createAddress(@Valid @RequestBody AddressPostRequest request) {
-        return CommonResult.success(addressService.createAddress(request));
+    public ResponseEntity<Address> createAddress(@Valid @RequestBody AddressPostRequest request) {
+        return ResponseEntity.ok(addressService.createAddress(request));
     }
 
     @GetMapping("/list")
-    public CommonResult listAddresses() {
-        return CommonResult.success(addressService.getList());
+    public ResponseEntity<List<Address>> listAddresses() {
+        return ResponseEntity.ok(addressService.getList());
     }
 }

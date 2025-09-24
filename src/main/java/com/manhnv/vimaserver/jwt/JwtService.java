@@ -23,7 +23,7 @@ public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
 
-    public String extractUsername(String token) {
+    public String extractPhoneNumber(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -32,16 +32,16 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(String userEmail) {
-        return buildToken(new HashMap<>(), userEmail, jwtExpiration);
+    public String generateToken(String phoneNumber) {
+        return buildToken(new HashMap<>(), phoneNumber, jwtExpiration);
     }
 
     public String buildToken(Map<String, Objects> extraClaims,
-                             String userEmail, long expiration) {
+                             String phoneNumber, long expiration) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userEmail)
+                .setSubject(phoneNumber)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -49,8 +49,8 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        final String phoneNumber = extractPhoneNumber(token);
+        return (phoneNumber.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {

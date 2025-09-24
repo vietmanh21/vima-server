@@ -1,7 +1,6 @@
 package com.manhnv.vimaserver.jwt;
 
 import cn.hutool.json.JSONUtil;
-import com.manhnv.vimaserver.common.CommonResult;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,16 +33,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String header = request.getHeader(tokenHeader);
         final String jwt;
-        final String userEmail;
+        final String phoneNumber;
         if (header == null ||!header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
         jwt = header.substring(7);
         try {
-            userEmail = jwtService.extractUsername(jwt);
-            if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+            phoneNumber = jwtService.extractPhoneNumber(jwt);
+            if (phoneNumber != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(phoneNumber);
                 if (jwtService.isTokenValid(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
@@ -60,7 +59,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.setHeader("Cache-Control","no-cache");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
-            response.getWriter().println(JSONUtil.parse(CommonResult.unauthorized(e.getMessage())));
+            response.getWriter().println();
             response.getWriter().flush();
         }
     }

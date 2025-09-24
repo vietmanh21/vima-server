@@ -1,9 +1,12 @@
 package com.manhnv.vimaserver.controller;
 
-import com.manhnv.vimaserver.common.CommonResult;
+import com.manhnv.vimaserver.dto.response.TicketResponse;
 import com.manhnv.vimaserver.service.CartService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cart")
@@ -12,7 +15,7 @@ public class CartController {
     private final CartService cartService;
 
     @GetMapping("/get-all")
-    public CommonResult getAllCart() {
-        return CommonResult.success(cartService.getAllTicketsInCart());
+    public ResponseEntity<List<TicketResponse>> getAllCart() {
+        return ResponseEntity.ok(cartService.getAllTicketsInCart());
     }
 }
