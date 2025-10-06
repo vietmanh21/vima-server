@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
 import com.manhnv.vimaserver.model.enumeration.TicketStatus;
 import jakarta.persistence.*;
@@ -18,10 +18,6 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", insertable = false, updatable = false)
-    private Order order;
-
     private String boardingPoint;
 
     private String dropoffPoint;
@@ -33,8 +29,4 @@ public class Ticket {
     @OneToOne
     @JoinColumn(name = "seat_id")
     private Seat seat;
-
-    @ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
 }

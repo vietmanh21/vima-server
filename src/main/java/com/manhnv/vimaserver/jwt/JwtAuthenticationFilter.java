@@ -1,4 +1,4 @@
-package com.falcon.serveradmin.jwt;
+package com.manhnv.vimaserver.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -32,16 +32,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         final String header = request.getHeader(tokenHeader);
         final String jwt;
-        final String phoneNumber;
+        final String username;
         if (header == null ||!header.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
         jwt = header.substring(7);
         try {
-            phoneNumber = jwtService.extractPhoneNumber(jwt);
-            if (phoneNumber != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(phoneNumber);
+            username = jwtService.extractUsername(jwt);
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
                 if (jwtService.isTokenValid(jwt, userDetails)) {
                     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                             userDetails,
@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.setHeader("Cache-Control","no-cache");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
-            response.getWriter().println();
+            response.getWriter().println("Invalid or missing token");
             response.getWriter().flush();
         }
     }

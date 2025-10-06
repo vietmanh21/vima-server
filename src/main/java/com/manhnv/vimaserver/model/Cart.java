@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "cart")
@@ -25,10 +24,5 @@ public class Cart {
     private User user;
 
     @OneToMany(mappedBy = "cart")
-    private List<Ticket> tickets;
-
-    public Cart(User user) {
-        this.user = user;
-        this.tickets = new ArrayList<>();
-    }
+    private List<CartItem> cartItems;
 }

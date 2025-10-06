@@ -1,6 +1,6 @@
-package com.falcon.serveradmin.repository;
+package com.manhnv.vimaserver.repository;
 
-import com.falcon.serverdb.model.Seat;
+import com.manhnv.vimaserver.model.Seat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

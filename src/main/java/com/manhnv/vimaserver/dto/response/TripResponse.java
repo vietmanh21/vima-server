@@ -1,7 +1,8 @@
-package com.falcon.serveradmin.dto.response;
+package com.manhnv.vimaserver.dto.response;
 
-import com.falcon.serverdb.model.enumeration.TripStatus;
-import com.falcon.serverdb.model.enumeration.TripType;
+import com.manhnv.vimaserver.model.Address;
+import com.manhnv.vimaserver.model.enumeration.TripStatus;
+import com.manhnv.vimaserver.model.enumeration.TripType;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public class TripResponse {
     private BigDecimal price;
     private Instant startTime;
     private Instant endTime;
-    private AddressResponse departurePoint;
-    private AddressResponse destinationPoint;
+    private Address departurePoint;
+    private Address destinationPoint;
     private TripStatus tripStatus;
 }

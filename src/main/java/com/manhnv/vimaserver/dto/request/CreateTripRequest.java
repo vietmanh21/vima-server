@@ -1,6 +1,6 @@
-package com.falcon.serveradmin.dto.request;
+package com.manhnv.vimaserver.dto.request;
 
-import com.falcon.serverdb.model.enumeration.TripType;
+import com.manhnv.vimaserver.model.enumeration.TripType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

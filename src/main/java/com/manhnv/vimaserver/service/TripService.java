@@ -1,16 +1,16 @@
-package com.falcon.serveradmin.service;
+package com.manhnv.vimaserver.service;
 
-import com.falcon.serveradmin.dto.request.CreateTripRequest;
-import com.falcon.serveradmin.dto.response.TripResponse;
-import com.falcon.serveradmin.mapper.TripMapper;
-import com.falcon.serveradmin.repository.AddressRepository;
-import com.falcon.serveradmin.repository.SeatRepository;
-import com.falcon.serveradmin.repository.TripRepository;
-import com.falcon.serveradmin.utils.Constants;
-import com.falcon.servercommon.exception.ApiException;
-import com.falcon.serverdb.model.Seat;
-import com.falcon.serverdb.model.Trip;
-import com.falcon.serverdb.model.enumeration.TripType;
+import com.manhnv.vimaserver.dto.request.CreateTripRequest;
+import com.manhnv.vimaserver.dto.response.TripResponse;
+import com.manhnv.vimaserver.exception.ApiException;
+import com.manhnv.vimaserver.mapper.TripMapper;
+import com.manhnv.vimaserver.model.Seat;
+import com.manhnv.vimaserver.model.Trip;
+import com.manhnv.vimaserver.model.enumeration.TripType;
+import com.manhnv.vimaserver.repository.AddressRepository;
+import com.manhnv.vimaserver.repository.SeatRepository;
+import com.manhnv.vimaserver.repository.TripRepository;
+import com.manhnv.vimaserver.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TripController {
     private final TripService tripService;
     @PostMapping("/create")
-    @PreAuthorize("hasAnyRole('ADMIN','SUPER_ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<TripResponse> createTrip(@Valid @RequestBody CreateTripRequest request) {
         return ResponseEntity.ok(tripService.createTrip(request));
     }

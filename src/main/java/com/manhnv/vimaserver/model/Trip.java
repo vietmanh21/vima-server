@@ -1,8 +1,8 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
-import com.falcon.serverdb.model.common.AbstractAuditEntity;
-import com.falcon.serverdb.model.enumeration.TripStatus;
-import com.falcon.serverdb.model.enumeration.TripType;
+import com.manhnv.vimaserver.model.common.AbstractAuditEntity;
+import com.manhnv.vimaserver.model.enumeration.TripStatus;
+import com.manhnv.vimaserver.model.enumeration.TripType;
 import jakarta.persistence.*;
 import lombok.*;
 

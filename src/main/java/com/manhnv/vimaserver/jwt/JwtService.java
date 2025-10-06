@@ -1,4 +1,4 @@
-package com.falcon.serveradmin.jwt;
+package com.manhnv.vimaserver.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -23,7 +23,7 @@ public class JwtService {
     @Value("${application.security.jwt.expiration}")
     private long jwtExpiration;
 
-    public String extractPhoneNumber(String token) {
+    public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -32,16 +32,16 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(String phoneNumber) {
-        return buildToken(new HashMap<>(), phoneNumber, jwtExpiration);
+    public String generateToken(String username) {
+        return buildToken(new HashMap<>(), username, jwtExpiration);
     }
 
     public String buildToken(Map<String, Objects> extraClaims,
-                             String phoneNumber, long expiration) {
+                             String username, long expiration) {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(phoneNumber)
+                .setSubject(username)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(getSigningKey(), SignatureAlgorithm.HS256)
@@ -49,7 +49,7 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String phoneNumber = extractPhoneNumber(token);
+        final String phoneNumber = extractUsername(token);
         return (phoneNumber.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 

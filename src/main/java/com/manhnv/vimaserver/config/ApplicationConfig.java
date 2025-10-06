@@ -19,17 +19,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserRepository userRepository;
+
     @Bean
     public UserDetailsService userDetailsService() {
-        return phoneNumber -> {
-            User user = userRepository.findByPhoneNumber((phoneNumber))
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found with phoneNumber: " + phoneNumber));
+        return username -> {
+            User user = userRepository.findByUsername((username))
+                    .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
             return new UserDetailsImpl(user);
         };
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
+    public AuthenticationProvider portalAuthProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
         authProvider.setPasswordEncoder(passwordEncoder());
@@ -46,13 +47,4 @@ public class ApplicationConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public RestfulAccessDeniedHandler restfulAccessDeniedHandler() {
-        return new RestfulAccessDeniedHandler();
-    }
-
-    @Bean
-    public RestAuthenticationEntryPoint restAuthenticationEntryPoint() {
-        return new RestAuthenticationEntryPoint();
-    }
 }

@@ -28,7 +28,7 @@ public class TicketService {
         Ticket ticket = Ticket.builder()
                 .boardingPoint(ticketRequest.getBoardingPoint())
                 .dropoffPoint(ticketRequest.getDropoffPoint())
-                .seat(seat).cart(cart).build();
+                .seat(seat).build();
         Ticket newTicket = ticketRepository.save(ticket);
         return TicketResponse.toResponse(newTicket);
     }

@@ -1,6 +1,5 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

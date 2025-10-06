@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,12 +30,12 @@ public class CartService {
         if (userCart != null) {
             return userCart;
         }
-        return cartRepository.save(new Cart(currentUser));
+        return null;
     }
 
     public List<TicketResponse> getAllTicketsInCart() {
         String currentUsername = AuthenticationUtils.extractUsername();
         User user = userRepository.findByUsername(currentUsername).orElseThrow(() -> new ApiException("User not found"));
-        return user.getCart().getTickets().stream().map(TicketResponse::toResponse).toList();
+        return new ArrayList<>();
     }
 }

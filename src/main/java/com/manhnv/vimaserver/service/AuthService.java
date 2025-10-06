@@ -7,11 +7,9 @@ import com.manhnv.vimaserver.exception.ApiException;
 import com.manhnv.vimaserver.exception.DuplicatedException;
 import com.manhnv.vimaserver.exception.NotFoundException;
 import com.manhnv.vimaserver.jwt.JwtService;
-import com.manhnv.vimaserver.model.Role;
+import com.manhnv.vimaserver.mapper.UserMapper;
 import com.manhnv.vimaserver.model.User;
-import com.manhnv.vimaserver.repository.RoleRepository;
 import com.manhnv.vimaserver.repository.UserRepository;
-import com.manhnv.vimaserver.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,32 +28,36 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    private final RoleRepository roleRepository;
+    private final UserMapper userMapper;
 
     public String signUp(SignUpRequest request) {
         boolean emailExists = userRepository.existsByEmail((request.getEmail()));
         if (emailExists) {
             throw new DuplicatedException("Email already exists");
         }
+        boolean usernameExists = userRepository.existsByUsername((request.getUsername()));
+        if (usernameExists) {
+            throw new DuplicatedException("Username already exists");
+        }
         boolean phoneNumberExists = userRepository.existsByPhoneNumber((request.getPhoneNumber()));
         if (phoneNumberExists) {
             throw new DuplicatedException("Phone number already exists");
         }
-        Role role = roleRepository.findByName(Constants.Role.ROLE_USER).orElseThrow(() -> new ApiException("Role not found"));
         User user = User.builder()
                 .firstname(request.getFirstName())
                 .lastname(request.getLastName())
                 .email(request.getEmail())
+                .username(request.getUsername())
                 .phoneNumber(request.getPhoneNumber())
                 .password(passwordEncoder.encode(request.getPassword()))
-                .role(role)
+                .authority("CUSTOMER")
                 .build();
         userRepository.save(user);
         return "Sign up successfully";
     }
 
     public SignInResponse signIn(LogInRequest request) {
-        User user = userRepository.findByPhoneNumber(request.getPhoneNumber())
+        User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow(() -> new NotFoundException("Invalid username"));
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new ApiException("Invalid password");
@@ -64,7 +66,7 @@ public class AuthService {
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getPhoneNumber(),
+                            request.getUsername(),
                             request.getPassword()
                     )
             );
@@ -75,9 +77,10 @@ public class AuthService {
             };
         }
 
-        String jwtToken = jwtService.generateToken(user.getPhoneNumber());
+        String jwtToken = jwtService.generateToken(user.getUsername());
         SignInResponse response = new SignInResponse();
         response.setAccessToken(jwtToken);
+        response.setUser(userMapper.toResponse(user));
 
         return response;
     }

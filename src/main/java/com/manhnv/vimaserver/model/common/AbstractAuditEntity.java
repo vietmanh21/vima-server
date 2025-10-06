@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model.common;
+package com.manhnv.vimaserver.model.common;
 
 import com.manhnv.vimaserver.model.listener.CustomAuditingEntityListener;
 import jakarta.persistence.EntityListeners;

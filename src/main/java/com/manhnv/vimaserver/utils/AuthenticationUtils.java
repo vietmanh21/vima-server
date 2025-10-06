@@ -1,6 +1,5 @@
-package com.falcon.serveradmin.utils;
+package com.manhnv.vimaserver.utils;
 
-import com.manhnv.vimaserver.common.ResultCode;
 import com.manhnv.vimaserver.exception.ApiException;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,7 +14,7 @@ public class AuthenticationUtils {
         Authentication authentication = getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
-            throw new ApiException(ResultCode.FORBIDDEN);
+            throw new ApiException("fobbiden");
         }
 
         return authentication.getName();

@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,9 +22,11 @@ public class User {
     private String lastname;
 
     @Column(nullable = false, unique = true)
-    private String email;
+    private String username;
 
     @Column(nullable = false, unique = true)
+    private String email;
+
     private String phoneNumber;
 
     @Column(nullable = false)
@@ -35,4 +37,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
+
+    private String authority;
 }

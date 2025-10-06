@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model.listener;
+package com.manhnv.vimaserver.model.listener;
 
 import com.manhnv.vimaserver.model.common.AbstractAuditEntity;
 import jakarta.persistence.PrePersist;

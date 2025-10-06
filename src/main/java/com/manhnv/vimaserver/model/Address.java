@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

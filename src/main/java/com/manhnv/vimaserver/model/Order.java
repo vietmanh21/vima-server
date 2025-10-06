@@ -1,4 +1,4 @@
-package com.falcon.serverdb.model;
+package com.manhnv.vimaserver.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.manhnv.vimaserver.model.enumeration.PaymentMethod;
@@ -34,10 +34,10 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
-    @Builder.Default
-    private List<Ticket> tickets = new ArrayList<>();
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @JsonManagedReference
+//    @Builder.Default
+//    private List<CartItem> cartItems = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

@@ -35,43 +35,44 @@ public class MediaService {
 
     public Media uploadMedia(MediaRequest request) {
         try {
-            MinioClient minioClient =MinioClient.builder()
-                    .endpoint(ENDPOINT)
-                    .credentials(ACCESS_KEY,SECRET_KEY)
-                    .build();
-            boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
-            if (isExist) {
-                log.info("Bucket exists！");
-            } else {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
-                BucketPolicyConfigDto bucketPolicyConfigDto = createBucketPolicyConfigDto(BUCKET_NAME);
-
-                ObjectMapper mapper = new ObjectMapper();
-
-                SetBucketPolicyArgs setBucketPolicyArgs = SetBucketPolicyArgs.builder()
-                        .bucket(BUCKET_NAME)
-                        .config(mapper.writeValueAsString(bucketPolicyConfigDto))
-                        .build();
-                minioClient.setBucketPolicy(setBucketPolicyArgs);
-            }
-            MultipartFile file = request.getMultipartFile();
-            String filename = null;
-            if (StringUtils.hasText(request.getFileNameOverride())) {
-                filename = request.getFileNameOverride();
-            } else {
-                filename = request.getMultipartFile().getOriginalFilename();
-            }
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-            String objectName = sdf.format(new Date()) + "/" + filename;
-            PutObjectArgs putObjectArgs = PutObjectArgs.builder()
-                    .bucket(BUCKET_NAME)
-                    .object(objectName)
-                    .contentType(file.getContentType())
-                    .stream(file.getInputStream(), file.getSize(), ObjectWriteArgs.MIN_MULTIPART_SIZE).build();
-            minioClient.putObject(putObjectArgs);
-            log.info("put to minio client!");
-            Media media = Media.builder().url(ENDPOINT + "/" + BUCKET_NAME + "/" + objectName).name(filename).build();
-            return mediaRepository.save(media);
+//            MinioClient minioClient =MinioClient.builder()
+//                    .endpoint(ENDPOINT)
+//                    .credentials(ACCESS_KEY,SECRET_KEY)
+//                    .build();
+//            boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
+//            if (isExist) {
+//                log.info("Bucket exists！");
+//            } else {
+//                minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
+//                BucketPolicyConfigDto bucketPolicyConfigDto = createBucketPolicyConfigDto(BUCKET_NAME);
+//
+//                ObjectMapper mapper = new ObjectMapper();
+//
+//                SetBucketPolicyArgs setBucketPolicyArgs = SetBucketPolicyArgs.builder()
+//                        .bucket(BUCKET_NAME)
+//                        .config(mapper.writeValueAsString(bucketPolicyConfigDto))
+//                        .build();
+//                minioClient.setBucketPolicy(setBucketPolicyArgs);
+//            }
+//            MultipartFile file = request.getMultipartFile();
+//            String filename = null;
+//            if (StringUtils.hasText(request.getFileNameOverride())) {
+//                filename = request.getFileNameOverride();
+//            } else {
+//                filename = request.getMultipartFile().getOriginalFilename();
+//            }
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+//            String objectName = sdf.format(new Date()) + "/" + filename;
+//            PutObjectArgs putObjectArgs = PutObjectArgs.builder()
+//                    .bucket(BUCKET_NAME)
+//                    .object(objectName)
+//                    .contentType(file.getContentType())
+//                    .stream(file.getInputStream(), file.getSize(), ObjectWriteArgs.MIN_MULTIPART_SIZE).build();
+//            minioClient.putObject(putObjectArgs);
+//            log.info("put to minio client!");
+//            Media media = Media.builder().url(ENDPOINT + "/" + BUCKET_NAME + "/" + objectName).name(filename).build();
+//            return mediaRepository.save(media);
+            return null;
         } catch (Exception e) {
             throw new ApiException(e.getMessage());
         }
