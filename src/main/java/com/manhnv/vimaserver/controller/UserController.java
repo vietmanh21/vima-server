@@ -16,14 +16,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    @GetMapping("/profile")
-    public ResponseEntity<UserResponse> getUserProfile(final Authentication authentication) {
-        UserResponse result = userService.getUserProfile(authentication.getName());
-        return ResponseEntity.ok(result);
-    }
-
-    @GetMapping("/get-all")
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAll());
-    }
+//    @GetMapping("/profile")
+//    public ResponseEntity<UserResponse> getUserProfile(final Authentication authentication) {
+//        UserResponse result = userService.getUserProfile(authentication.getName());
+//        return ResponseEntity.ok(result);
+//    }
+//
+//    @GetMapping("/get-all")
+//    public ResponseEntity<List<UserResponse>> getAllUsers() {
+//        return ResponseEntity.ok(userService.getAll());
+//    }
 }

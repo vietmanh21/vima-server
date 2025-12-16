@@ -1,25 +1,25 @@
 package com.manhnv.vimaserver.model;
 
+import com.manhnv.vimaserver.model.common.BaseEntity;
+import com.manhnv.vimaserver.model.enumeration.ROLE;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "users")
 @Entity
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String firstname;
-    private String lastname;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -27,16 +27,15 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    private String phoneNumber;
-
     @Column(nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Order> orders;
+    private String bio;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private Cart cart;
+    private String avatar;
 
-    private String authority;
+    private Instant lastLogin;
+
+    @Enumerated(EnumType.STRING)
+    private ROLE role;
 }

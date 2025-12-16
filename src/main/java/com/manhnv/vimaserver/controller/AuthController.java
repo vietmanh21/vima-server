@@ -1,6 +1,6 @@
 package com.manhnv.vimaserver.controller;
 
-import com.manhnv.vimaserver.dto.request.LogInRequest;
+import com.manhnv.vimaserver.dto.request.SignInRequest;
 import com.manhnv.vimaserver.dto.request.SignUpRequest;
 import com.manhnv.vimaserver.dto.response.SignInResponse;
 import com.manhnv.vimaserver.service.AuthService;
@@ -16,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    @PostMapping("/register")
+    @PostMapping("/sign-up")
     public ResponseEntity<String> register(@RequestBody SignUpRequest request) {
         // Logic for user registration
         return ResponseEntity.ok(authService.signUp(request));
     }
 
     @PostMapping("/sign-in")
-    public ResponseEntity<SignInResponse> signIn(@RequestBody LogInRequest request) {
+    public ResponseEntity<SignInResponse> signIn(@RequestBody SignInRequest request) {
         // Logic for user login
         return ResponseEntity.ok(authService.signIn(request));
     }
