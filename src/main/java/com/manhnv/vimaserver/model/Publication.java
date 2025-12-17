@@ -32,4 +32,11 @@ public class Publication {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    @Builder.Default
+    private int views = 0;
+
+    public void incrementViews() {
+        this.views++;
+    }
 }

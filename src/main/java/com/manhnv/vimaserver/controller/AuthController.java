@@ -3,7 +3,7 @@ package com.manhnv.vimaserver.controller;
 import com.manhnv.vimaserver.dto.request.SignInRequest;
 import com.manhnv.vimaserver.dto.request.SignUpRequest;
 import com.manhnv.vimaserver.dto.response.SignInResponse;
-import com.manhnv.vimaserver.service.AuthService;
+import com.manhnv.vimaserver.service.impl.AuthServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthService authService;
+    private final AuthServiceImpl authService;
     @PostMapping("/sign-up")
     public ResponseEntity<String> register(@RequestBody SignUpRequest request) {
         // Logic for user registration

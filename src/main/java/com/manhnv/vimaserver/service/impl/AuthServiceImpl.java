@@ -1,4 +1,4 @@
-package com.manhnv.vimaserver.service;
+package com.manhnv.vimaserver.service.impl;
 
 import com.manhnv.vimaserver.dto.request.SignInRequest;
 import com.manhnv.vimaserver.dto.request.SignUpRequest;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class AuthService {
+public class AuthServiceImpl {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;

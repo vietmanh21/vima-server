@@ -14,13 +14,14 @@ public final class AuthenticationUtils {
         return SecurityContextHolder.getContext().getAuthentication();
     }
 
-    public static User extractUser() {
+    public static User getCurrentUser() {
         Authentication authentication = getAuthentication();
 
         if (authentication instanceof AnonymousAuthenticationToken) {
             throw new AccessDeniedException(ApiConstant.ACCESS_DENIED);
         }
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        return ((UserDetailsImpl) authentication.getPrincipal()).getUser();
+        return userDetails.getUser();
     }
 }

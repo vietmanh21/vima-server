@@ -1,21 +1,15 @@
 package com.manhnv.vimaserver.controller;
 
-import com.manhnv.vimaserver.dto.response.UserResponse;
-import com.manhnv.vimaserver.service.UserService;
+import com.manhnv.vimaserver.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserService userService;
+    private final UserServiceImpl userService;
 //    @GetMapping("/profile")
 //    public ResponseEntity<UserResponse> getUserProfile(final Authentication authentication) {
 //        UserResponse result = userService.getUserProfile(authentication.getName());
